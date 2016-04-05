@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'PATabbarView_Example', :exclusive => true do
+  pod 'PATabbarView', :path => '../'
+end
+
+target 'PATabbarView_Tests', :exclusive => true do
+  pod 'PATabbarView', :path => '../'
+
+  
+end
