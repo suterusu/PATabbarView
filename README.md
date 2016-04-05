@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/PATabbarView.svg?style=flat)](http://cocoapods.org/pods/PATabbarView)
 [![Platform](https://img.shields.io/cocoapods/p/PATabbarView.svg?style=flat)](http://cocoapods.org/pods/PATabbarView)
 
+![header:YES mid:NO](./SampleImages/sampleGif.gif "header:YES mid:NO")  
+**[Shrink Flags] header:YES mid:NO**
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
