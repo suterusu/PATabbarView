@@ -15,8 +15,8 @@ Pushable Tabbar is like MacOS Safari.You can add subclass of PATabbarPushedView 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'PATabbarView/*'
-  s.public_header_files = 'PATabbarView/*.h'
+  s.source_files = 'Class/*'
+  s.public_header_files = 'Class/PATabbarView.h','Class/PATabbarPushedView.h'
 
 
 end
