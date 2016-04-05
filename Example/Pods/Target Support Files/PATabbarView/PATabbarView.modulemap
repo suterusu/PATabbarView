@@ -1,0 +1,6 @@
+framework module PATabbarView {
+  umbrella header "PATabbarView-umbrella.h"
+
+  export *
+  module * { export * }
+}

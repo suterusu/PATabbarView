@@ -1,0 +1,14 @@
+PODS:
+  - PATabbarView (0.1.0)
+
+DEPENDENCIES:
+  - PATabbarView (from `../`)
+
+EXTERNAL SOURCES:
+  PATabbarView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PATabbarView: 76452436932a8690e6896722d40de9166fb248d1
+
+COCOAPODS: 0.39.0
