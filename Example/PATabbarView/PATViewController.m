@@ -26,6 +26,7 @@
 - (IBAction)pushToTabbar:(id)sender {
     UINib *nib = [UINib nibWithNibName:@"ExampleSubPushedView" bundle:nil];
     ExampleSubPushedView *pushedView=  [nib instantiateWithOwner:nil options:nil][0];
+    pushedView.layer.borderColor = [UIColor blackColor].CGColor;
     [self.tabbar addToTailView:pushedView];
 }
 
@@ -44,9 +45,9 @@
     switch (touchedView.currentState) {
         case PATabbarPushedViewStatusEmphasis:{
             for (PATabbarPushedView *push = self.tabbar.head; push; push = push.next) {
-                push.layer.cornerRadius = 0;
+                push.layer.borderWidth = 0;
             }
-            touchedView.layer.cornerRadius = 30;
+            touchedView.layer.borderWidth = 2;
             _currentCenter = touchedView;
             break;}
         case PATabbarPushedViewStatusDisplayed:{
@@ -57,9 +58,9 @@
 
 -(void)finishedAdjustAnimationAtForcusedView:(PATabbarPushedView *)forcusedView{
     for (PATabbarPushedView *push = self.tabbar.head; push; push = push.next) {
-        push.layer.cornerRadius = 0;
+        push.layer.borderWidth = 0;
     }
-    forcusedView.layer.cornerRadius = 30;
+    _currentCenter.layer.borderWidth = 2;
     _currentCenter = forcusedView;
 }
 
