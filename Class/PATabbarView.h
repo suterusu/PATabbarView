@@ -31,11 +31,15 @@
 
 @property (weak) NSObject<PATabbarViewDelegate> *delegate;
 
-@property (weak,readonly,nonatomic) PATabbarPushedView *head;
-@property (weak,readonly,nonatomic) PATabbarPushedView *tail;
-@property (weak,readonly,nonatomic) PATabbarPushedView *selectedView;
+@property (weak,readonly,nonatomic) PATabbarPushedView *head;//Leftmost PushedView.If not exist It is nil.
+@property (weak,readonly,nonatomic) PATabbarPushedView *tail;//Rightmost PushedView.If not exist It is nil.
 
 -(void)addToTailView:(PATabbarPushedView *)view;
+
+/**
+ In order near the centerView,It will be set to currentStatus ,first Emphasis,next Displayed and notDisplayed.
+ */
 -(void)adjustPositionWithAForcusOnView:(PATabbarPushedView *)centerView;
+
 -(void)deleteView:(PATabbarPushedView *)deleteView;
 @end

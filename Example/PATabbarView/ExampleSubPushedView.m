@@ -10,6 +10,7 @@
 #define ARC4RANDOM_MAX      0x100000000
 @implementation ExampleSubPushedView{
     UIColor *_color;
+    __weak IBOutlet UILabel *_label;
 }
 
 
@@ -22,9 +23,11 @@
 -(void)afterChangeState:(PATabbarPushedViewState)state{
     switch (state) {
         case PATabbarPushedViewStatusEmphasis:
+            _label.text = @"emphasis";
             self.backgroundColor = _color;
             break;
         default:
+            _label.text = @"displayed";
             self.backgroundColor = [ExampleSubPushedView csn_colorWithBaseColor:_color brightnessRatio:0.5];
             break;
     }

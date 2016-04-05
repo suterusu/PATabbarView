@@ -27,9 +27,13 @@
                 <constraint firstItem="XhE-83-Vt3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="cGI-g4-7SO"/>
                 <constraint firstItem="i1z-1G-YYG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dmc-z3-M5Z"/>
                 <constraint firstItem="i1z-1G-YYG" firstAttribute="leading" secondItem="XhE-83-Vt3" secondAttribute="trailing" constant="3" id="oFD-fq-R4g"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i1z-1G-YYG" secondAttribute="trailing" id="sgX-72-SOo"/>
                 <constraint firstItem="XhE-83-Vt3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tuY-p0-tQS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="_label" destination="i1z-1G-YYG" id="yVE-0v-oeX"/>
+            </connections>
             <point key="canvasLocation" x="392" y="158.5"/>
         </view>
     </objects>
