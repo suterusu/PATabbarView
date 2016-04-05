@@ -21,4 +21,7 @@ typedef NS_ENUM(NSInteger, PATabbarPushedViewState)
 @property (weak,readonly) PATabbarPushedView *prev;
 @property (readonly) PATabbarPushedViewState currentState;
 @property (nonatomic) BOOL highlighted;
+
+-(void)afterChangeState:(PATabbarPushedViewState)state;
+
 @end

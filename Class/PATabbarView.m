@@ -7,6 +7,7 @@
 
 #import "PATabbarView.h"
 #import "PATabbarPushedView+Private.h"
+#import "PATabbarPushedView.h"
 
 #define PATabbarViewKeyEmphasis @"Emphasis"
 #define PATabbarViewKeyDisplayed @"Displayed"

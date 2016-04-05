@@ -6,6 +6,8 @@
 //  Copyright (c) 2016 Inba. All rights reserved.
 //
 
+#import "PATabbarView.h"
+
 @import UIKit;
 
 @interface PATViewController : UIViewController

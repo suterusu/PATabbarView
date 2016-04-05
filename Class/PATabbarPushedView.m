@@ -37,6 +37,10 @@
     }];
 }
 
+-(void)afterChangeState:(PATabbarPushedViewState)state{
+    //abstract
+}
+
 -(void)dealloc{
     _constraints = nil;
 }
@@ -64,6 +68,7 @@
 }
 
 -(void)setState:(PATabbarPushedViewState)state{
+    [self afterChangeState:state];
     _currentState = state;
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08F7FC201CB3AB9A00D9D35E /* ExampleSubPushedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F7FC1F1CB3AB9A00D9D35E /* ExampleSubPushedView.m */; };
+		08F7FC221CB3ABC400D9D35E /* ExampleSubPushedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F7FC211CB3ABC400D9D35E /* ExampleSubPushedView.xib */; };
 		5DFE76DFAC734AEDEB64875B /* Pods_PATabbarView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C830177527F6EFDB13BDE0 /* Pods_PATabbarView_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08F7FC1E1CB3AB9A00D9D35E /* ExampleSubPushedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSubPushedView.h; sourceTree = "<group>"; };
+		08F7FC1F1CB3AB9A00D9D35E /* ExampleSubPushedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSubPushedView.m; sourceTree = "<group>"; };
+		08F7FC211CB3ABC400D9D35E /* ExampleSubPushedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleSubPushedView.xib; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PATabbarView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PATabbarView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +140,9 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* PATViewController.h */,
 				6003F5A6195388D20070C39A /* PATViewController.m */,
+				08F7FC211CB3ABC400D9D35E /* ExampleSubPushedView.xib */,
+				08F7FC1E1CB3AB9A00D9D35E /* ExampleSubPushedView.h */,
+				08F7FC1F1CB3AB9A00D9D35E /* ExampleSubPushedView.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -279,6 +287,7 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				08F7FC221CB3ABC400D9D35E /* ExampleSubPushedView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +402,7 @@
 				6003F59E195388D20070C39A /* PATAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* PATViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				08F7FC201CB3AB9A00D9D35E /* ExampleSubPushedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -500,7 +510,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

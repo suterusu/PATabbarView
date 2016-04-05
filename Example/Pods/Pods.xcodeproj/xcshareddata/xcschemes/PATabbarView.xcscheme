@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7E1F8EDE7B20805D1BB0E53A'
+               BlueprintIdentifier = '8D8DBBA7EAB9B563B29CAA64'
                BlueprintName = 'PATabbarView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'PATabbarView.framework'>

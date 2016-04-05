@@ -6,9 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PATabbarPushedView.h"
+
 
 @class PATabbarView;
+@class PATabbarPushedView;
 
 @protocol PATabbarViewDelegate <NSObject>
 
