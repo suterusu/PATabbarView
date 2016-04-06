@@ -20,7 +20,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-KO-DFJ" customClass="PATabbarView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.98642676767676762" green="0.98642676767676762" blue="0.98642676767676762" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="iNp-Ji-c2v"/>
                                 </constraints>
@@ -44,6 +44,7 @@
                     </view>
                     <connections>
                         <outlet property="tabbar" destination="fRw-KO-DFJ" id="0ge-sb-T7x"/>
+                        <outlet property="tabbarHeight" destination="iNp-Ji-c2v" id="iMz-Ec-kWe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -21,9 +21,9 @@
 
 @interface PATabbarView : UIView
 
-#define PATabbarViewRatioOfEmphasisedWidth 0.8
-#define PATabbarViewSumOfEmphasisPushedView 4
-#define PATabbarViewSumOfDisplayedView 3
+#define PATabbarViewRatioOfEmphasisedWidth 0.9
+#define PATabbarViewSumOfEmphasisPushedView 3
+#define PATabbarViewSumOfDisplayedView 4
 
 #define PATabbarViewDurationForDeleteAnime 0.3
 #define PATabbarViewDurationForRepositionAnime 0.5

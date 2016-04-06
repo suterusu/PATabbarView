@@ -7,9 +7,9 @@
 //
 
 #import "PATabbarView.h"
-
+#import "ExampleSubPushedView.h"
 @import UIKit;
 
-@interface PATViewController : UIViewController
+@interface PATViewController : UIViewController<PATabbarViewDelegate,ExampleSubPushedViewDelegate>
 
 @end

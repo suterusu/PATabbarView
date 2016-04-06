@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,30 +12,50 @@
             <rect key="frame" x="0.0" y="0.0" width="552" height="107"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhE-83-Vt3">
-                    <rect key="frame" x="5" y="39" width="46" height="30"/>
-                    <state key="normal" title="Button"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="REV-3s-YOT">
+                    <rect key="frame" x="487" y="0.0" width="55" height="107"/>
+                    <color key="backgroundColor" red="0.96728703890000001" green="1" blue="0.23687364259999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJY-e5-zZ7">
+                    <rect key="frame" x="5" y="47" width="40" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="Delete">
+                        <color key="titleColor" red="0.074509806931018829" green="0.37254902720451355" blue="0.49411767721176147" alpha="1" colorSpace="deviceRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="pushDeleteButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="JP9-SM-7H6"/>
+                    </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1z-1G-YYG">
-                    <rect key="frame" x="54" y="43" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATabbarView" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1z-1G-YYG">
+                    <rect key="frame" x="5" y="10" width="69" height="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
+                    <color key="highlightedColor" red="0.79635354030679406" green="1" blue="0.80586131843721587" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="XhE-83-Vt3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="cGI-g4-7SO"/>
-                <constraint firstItem="i1z-1G-YYG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dmc-z3-M5Z"/>
-                <constraint firstItem="i1z-1G-YYG" firstAttribute="leading" secondItem="XhE-83-Vt3" secondAttribute="trailing" constant="3" id="oFD-fq-R4g"/>
+                <constraint firstItem="REV-3s-YOT" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.1" id="2G4-WE-hQZ"/>
+                <constraint firstItem="MJY-e5-zZ7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="999" constant="5" id="CSd-kv-J5j"/>
+                <constraint firstAttribute="trailing" secondItem="REV-3s-YOT" secondAttribute="trailing" priority="999" constant="10" id="Do9-Ya-oXm"/>
+                <constraint firstAttribute="bottom" secondItem="REV-3s-YOT" secondAttribute="bottom" id="FfC-Zb-gLx"/>
+                <constraint firstItem="REV-3s-YOT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i1z-1G-YYG" secondAttribute="trailing" id="FhE-MS-FYj"/>
+                <constraint firstItem="MJY-e5-zZ7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" id="QXa-ep-rxL"/>
+                <constraint firstItem="i1z-1G-YYG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="RaO-bn-grQ"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="REV-3s-YOT" secondAttribute="trailing" id="ZOB-GB-kud"/>
+                <constraint firstItem="REV-3s-YOT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MJY-e5-zZ7" secondAttribute="trailing" priority="200" id="bd3-Uu-LyA"/>
+                <constraint firstItem="REV-3s-YOT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="doR-aB-jIB"/>
+                <constraint firstItem="MJY-e5-zZ7" firstAttribute="top" secondItem="i1z-1G-YYG" secondAttribute="bottom" constant="25" id="hUU-88-bJq"/>
+                <constraint firstItem="i1z-1G-YYG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="999" constant="5" id="mtI-Vz-4w6"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i1z-1G-YYG" secondAttribute="trailing" id="sgX-72-SOo"/>
-                <constraint firstItem="XhE-83-Vt3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tuY-p0-tQS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="_label" destination="i1z-1G-YYG" id="yVE-0v-oeX"/>
+                <outlet property="bar" destination="REV-3s-YOT" id="4Qm-bP-26X"/>
+                <outlet property="deleteButton" destination="MJY-e5-zZ7" id="58s-X4-Or1"/>
+                <outlet property="label" destination="i1z-1G-YYG" id="fIN-SH-4ar"/>
             </connections>
-            <point key="canvasLocation" x="392" y="158.5"/>
+            <point key="canvasLocation" x="137" y="119.5"/>
         </view>
     </objects>
 </document>

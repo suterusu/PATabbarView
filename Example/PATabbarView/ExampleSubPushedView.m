@@ -10,7 +10,7 @@
 #define ARC4RANDOM_MAX      0x100000000
 @implementation ExampleSubPushedView{
     UIColor *_color;
-    __weak IBOutlet UILabel *_label;
+
 }
 
 
@@ -19,15 +19,20 @@
     self.backgroundColor = [UIColor colorWithRed:randFloat(0.5, 1) green:randFloat(0.5, 1) blue:randFloat(0.5, 1) alpha:1];
     _color = self.backgroundColor;
 }
+- (IBAction)pushDeleteButton:(id)sender {
+    [self.delegate pushedDeleteButtonOnView:self];
+}
 
 -(void)afterChangeState:(PATabbarPushedViewState)state{
     switch (state) {
         case PATabbarPushedViewStatusEmphasis:
-            _label.text = @"emphasis";
+            self.bar.hidden = NO;
+            self.label.hidden = NO;
             self.backgroundColor = _color;
             break;
         default:
-            _label.text = @"displayed";
+            self.label.hidden = YES;
+            self.bar.hidden = YES;
             self.backgroundColor = [ExampleSubPushedView csn_colorWithBaseColor:_color brightnessRatio:0.5];
             break;
     }

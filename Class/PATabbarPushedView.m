@@ -18,11 +18,16 @@
     _constraints = self.constraints;
 }
 
+-(instancetype)init{
+    return [self initWithFrame:CGRectZero];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
          self.translatesAutoresizingMaskIntoConstraints = NO;
+        _constraints = self.constraints;
     }
     return self;
 }
@@ -38,6 +43,20 @@
 
 -(void)afterChangeState:(PATabbarPushedViewState)state{
     //abstract
+}
+
+-(void)addConstraint:(NSLayoutConstraint *)constraint{
+    [super addConstraint:constraint];
+    if (self.currentState == PATabbarPushedViewStatusNotDecide) {
+        _constraints = self.constraints;
+    }
+}
+
+-(void)addConstraints:(NSArray<__kindof NSLayoutConstraint *> *)constraints{
+    [super addConstraints:constraints];
+    if (self.currentState == PATabbarPushedViewStatusNotDecide) {
+        _constraints = self.constraints;
+    }
 }
 
 -(void)dealloc{
