@@ -8,6 +8,11 @@
 ![header:YES mid:NO](./SampleImages/sampleGif.gif "header:YES mid:NO")  
 
 ## Usage
+If you want to try it, simply run:
+
+```ruby
+pod try PATabbarView
+```
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
@@ -21,8 +26,7 @@ pod "PATabbarView"
 ```
 
 
-# Easy to use
-
+# How to
 
 1.Add PATabbarView To Interface.
 
