@@ -26,8 +26,7 @@ pod "PATabbarView"
 
 1.Add PATabbarView To Interface.
 
-
-2.Make PATabbarPushedView class obj.And Call addToTailView: in addition to this obj as an argument
+2.Make PATabbarPushedView class obj,and call addToTailView: in addition to this obj as an argument
 
     UINib *nib = [UINib nibWithNibName:@"PATabbarPushedView" bundle:nil];
     PATabbarPushedView *pushedView=  [nib instantiateWithOwner:nil options:nil][0]; 
@@ -36,7 +35,7 @@ pod "PATabbarView"
     
 # Delete pushedView From tabbarView.
 If call deleteView:, Argument view is deleted from PATabbarView with delete and reposition animation.
-PushedView must be in subview of tabbar.
+PushedView must be in subview of PATabbarPushedView obj.
 
 `[self.tabbarView deleteView:pushedView];`
 
@@ -51,6 +50,12 @@ If call adjustPositionWithAForcusOnView:,Pushed views reposition With A Forcus O
 
 You can applie autolayout and autosize to PATabbarPushedView obj.
 You had better use autolayout with nib.(Possible in other ways! maybe..)
+
+#Requirements
+
+・Xcode 7.0 or greater
+
+・iOS8.0 or greater
 
 ## Author
 
