@@ -18,6 +18,29 @@
     NSArray *_firstConstrainsArray;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setDefParams];
+    }
+    return self;
+}
+
+-(void)awakeFromNib{
+    [self setDefParams];
+    _firstConstrainsArray = [NSArray arrayWithArray:self.constraints];
+}
+
+-(void)setDefParams{
+    _ratioOfEmphasisedViewWidth = 0.8;
+    _sumOfDisplayedView = 4;
+    _sumOfEmphasisPushedView = 3;
+    _durationForDeleteAnime = 0.3;
+    _durationForRepositionAnime = 0.5;
+    _latencyUpToRepositionFromDelete = 0.7;
+    _lengthBetweenPushedViews = 1;
+}
 
 -(void)addToTailView:(PATabbarPushedView *)view{
     CGFloat firstWidth = view.frame.size.width?:50;
@@ -60,7 +83,7 @@
     
     if (nextSelectedView) {
         deleteView.hidden = YES;
-        [UIView animateWithDuration:PATabbarViewDurationForDeleteAnime animations:^{
+        [UIView animateWithDuration:_durationForDeleteAnime animations:^{
             if (nextOfDeleteView) {
                 [nextOfDeleteView removeConstraints:nextOfDeleteView.constraints];
                 [nextOfDeleteView reAddFirstSelfConstraints];
@@ -71,18 +94,18 @@
             }
             
             if ((previousOfDeleteView == nil)&&nextOfDeleteView) {//nextSelectedView is head |-(0)-nextSelectedView
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+                [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:_lengthBetweenPushedViews]];
             }else if (nextOfDeleteView&&previousOfDeleteView){//previous-(0)-next
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:previousOfDeleteView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+                [self addConstraint:[NSLayoutConstraint constraintWithItem:previousOfDeleteView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:_lengthBetweenPushedViews]];
             }
             [self layoutIfNeeded];
         } completion:^(BOOL finished) {
             if (nextSelectedView) {
-                [NSTimer scheduledTimerWithTimeInterval:PATabbarViewLatencyUpToRepositionFromDelete target:self selector:@selector(adjustmentIfInInterface:) userInfo:@{PATabbarViewKeyNextAdjustmentTarget:nextSelectedView} repeats:NO];
+                [NSTimer scheduledTimerWithTimeInterval:_latencyUpToRepositionFromDelete target:self selector:@selector(adjustmentIfInInterface:) userInfo:@{PATabbarViewKeyNextAdjustmentTarget:nextSelectedView} repeats:NO];
 
             }
         }];
-    }else{//zero
+    }else{//delete the last one
         if ([self.delegate respondsToSelector:@selector(deletedLastPushedView)]) {
             [self.delegate deletedLastPushedView];
         }
@@ -121,29 +144,41 @@
     CGFloat displayViewWidth;
     NSArray *emphasisDisplayedViews = dicSeparatedStatus[PATabbarViewKeyEmphasis];
     NSArray *displayedViews = dicSeparatedStatus[PATabbarViewKeyDisplayed];
+    NSArray *notDisplayedViews = dicSeparatedStatus[PATabbarViewKeyNotDisplayedViews];
+    CGFloat sumOfSpaceLength = (emphasisDisplayedViews.count+displayedViews.count - 1)*_lengthBetweenPushedViews;
     if (displayedViews.count == 0) {
-        emphasisViewWidth = self.frame.size.width/emphasisDisplayedViews.count;
+        emphasisViewWidth = (self.frame.size.width-sumOfSpaceLength)/emphasisDisplayedViews.count;
         displayViewWidth = 0;
     }else{
-        emphasisViewWidth = self.frame.size.width*PATabbarViewRatioOfEmphasisedWidth/emphasisDisplayedViews.count;
-        displayViewWidth = (self.frame.size.width - self.frame.size.width*PATabbarViewRatioOfEmphasisedWidth)/displayedViews.count;
+        emphasisViewWidth = (self.frame.size.width-sumOfSpaceLength)*_ratioOfEmphasisedViewWidth/emphasisDisplayedViews.count;
+        displayViewWidth = ((self.frame.size.width-sumOfSpaceLength) - self.frame.size.width*_ratioOfEmphasisedViewWidth)/displayedViews.count;
     }
 
     for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
+        float spaceLength = 0;//only exist between displayed and emphasis pushedViews
         if (pushedView.next) {
             [self addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:pushedView.next attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
         }
             
         if ([emphasisDisplayedViews containsObject:pushedView]) {
-                [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:emphasisViewWidth]];
+            [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:emphasisViewWidth]];
+            spaceLength = _lengthBetweenPushedViews;
         }else if ([displayedViews containsObject:pushedView]){
-                [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:displayViewWidth]];
+            [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:displayViewWidth]];
+            spaceLength = _lengthBetweenPushedViews;
         }else{
-                [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0]];
+            [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0]];
+        }
+        
+        if (pushedView.next) {
+            if ((spaceLength >0) && ([notDisplayedViews containsObject:pushedView.next]) ) {
+                spaceLength = 0;
+            }
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:pushedView.next attribute:NSLayoutAttributeLeft multiplier:1 constant:-spaceLength]];
         }
     }
     
-    [UIView animateWithDuration:PATabbarViewDurationForRepositionAnime animations:^{
+    [UIView animateWithDuration:_durationForRepositionAnime animations:^{
         [self layoutIfNeeded];
     }completion:^(BOOL finished) {
         if ([self.delegate respondsToSelector:@selector(finishedAdjustAnimationAtForcusedView:)]) {
@@ -177,11 +212,11 @@
             [currentAddedArray addObject:next];
             next = next.next;
         }
-        if (emphasisDisplayedViews.count >=PATabbarViewSumOfEmphasisPushedView) {
+        if (emphasisDisplayedViews.count >=_sumOfEmphasisPushedView) {
             currentAddedArray = displayedViews;
             currentSettingState = PATabbarPushedViewStatusDisplayed;
         }
-        if (displayedViews.count >= PATabbarViewSumOfDisplayedView) {
+        if (displayedViews.count >= _sumOfDisplayedView) {
             currentAddedArray = notDisplayedViews;
             currentSettingState = PATabbarPushedViewStatusNotDisplayed;
         }
@@ -191,11 +226,11 @@
             [currentAddedArray addObject:prev];
             prev = prev.prev;
         }
-        if (emphasisDisplayedViews.count >=PATabbarViewSumOfEmphasisPushedView) {
+        if (emphasisDisplayedViews.count >=_sumOfEmphasisPushedView) {
             currentAddedArray = displayedViews;
             currentSettingState = PATabbarPushedViewStatusDisplayed;
         }
-        if (displayedViews.count >= PATabbarViewSumOfDisplayedView) {
+        if (displayedViews.count >= _sumOfDisplayedView) {
             currentAddedArray = notDisplayedViews;
             currentSettingState = PATabbarPushedViewStatusNotDisplayed;
         }
@@ -219,13 +254,11 @@
     return nil;
 }
 
--(void)awakeFromNib{
-    _firstConstrainsArray = [NSArray arrayWithArray:self.constraints];
-}
-
 -(void)dealloc{
     _firstConstrainsArray = nil;
 }
+
+#pragma mark - Class method
 
 +(void)deleteAllConstraintsRelatedView:(UIView *)relatedView FromView:(UIView *)from{
     NSMutableArray *newConstraints = [NSMutableArray array];

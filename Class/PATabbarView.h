@@ -21,14 +21,13 @@
 
 @interface PATabbarView : UIView
 
-#define PATabbarViewRatioOfEmphasisedWidth 0.9
-#define PATabbarViewSumOfEmphasisPushedView 3
-#define PATabbarViewSumOfDisplayedView 4
-
-#define PATabbarViewDurationForDeleteAnime 0.3
-#define PATabbarViewDurationForRepositionAnime 0.5
-#define PATabbarViewLatencyUpToRepositionFromDelete 0.7
-
+@property CGFloat ratioOfEmphasisedViewWidth;
+@property NSInteger sumOfEmphasisPushedView;
+@property NSInteger sumOfDisplayedView;
+@property CGFloat durationForDeleteAnime;
+@property CGFloat durationForRepositionAnime;
+@property CGFloat latencyUpToRepositionFromDelete;
+@property CGFloat lengthBetweenPushedViews;
 @property (weak) NSObject<PATabbarViewDelegate> *delegate;
 
 @property (weak,readonly,nonatomic) PATabbarPushedView *head;//Leftmost PushedView.If not exist It is nil.
