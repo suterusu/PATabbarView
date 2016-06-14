@@ -151,14 +151,11 @@
         displayViewWidth = 0;
     }else{
         emphasisViewWidth = (self.frame.size.width-sumOfSpaceLength)*_ratioOfEmphasisedViewWidth/emphasisDisplayedViews.count;
-        displayViewWidth = ((self.frame.size.width-sumOfSpaceLength) - self.frame.size.width*_ratioOfEmphasisedViewWidth)/displayedViews.count;
+        displayViewWidth = ((self.frame.size.width-sumOfSpaceLength) - (self.frame.size.width-sumOfSpaceLength)*_ratioOfEmphasisedViewWidth)/displayedViews.count;
     }
 
     for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
         float spaceLength = 0;//only exist between displayed and emphasis pushedViews
-        if (pushedView.next) {
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:pushedView.next attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
-        }
             
         if ([emphasisDisplayedViews containsObject:pushedView]) {
             [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:emphasisViewWidth]];
@@ -243,8 +240,8 @@
     return @{PATabbarViewKeyEmphasis:[NSArray arrayWithArray:emphasisDisplayedViews],PATabbarViewKeyDisplayed:[NSArray arrayWithArray:displayedViews],PATabbarViewKeyNotDisplayedViews:[NSArray arrayWithArray:notDisplayedViews]};
 }
 
+#pragma mark -Private
 
-//Private
 -(PATabbarPushedView *)tail{
     for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
         if (pushedView.next == nil) {

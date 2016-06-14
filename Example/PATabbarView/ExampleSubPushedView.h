@@ -12,7 +12,9 @@
 
 @protocol ExampleSubPushedViewDelegate <NSObject>
 
--(void)pushedDeleteButtonOnView:(ExampleSubPushedView *)view;
+-(void)pushedDeleteButtonInPushedView:(ExampleSubPushedView *)sender;
+-(void)tapTab:(ExampleSubPushedView *)sender;
+
 
 @end
 
@@ -21,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIView *bar;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak) UIViewController<ExampleSubPushedViewDelegate> *delegate;
+@property (strong, nonatomic) UIViewController *controller;
 
 @end

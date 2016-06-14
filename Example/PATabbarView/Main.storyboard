@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,31 +17,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-KO-DFJ" customClass="PATabbarView">
-                                <rect key="frame" x="0.0" y="20" width="600" height="80"/>
-                                <color key="backgroundColor" red="0.98642676767676762" green="0.98642676767676762" blue="0.98642676767676762" alpha="1" colorSpace="calibratedRGB"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-KO-DFJ" customClass="PATabbarView">
+                                <rect key="frame" x="0.0" y="20" width="550" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="iNp-Ji-c2v"/>
+                                    <constraint firstAttribute="height" constant="30" id="iNp-Ji-c2v"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZB-EI-BeN">
-                                <rect key="frame" x="53" y="161" width="35" height="30"/>
-                                <state key="normal" title="Push"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG3-MV-Y5i">
+                                <rect key="frame" x="0.0" y="50" width="600" height="550"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gd4-r8-yA0">
+                                <rect key="frame" x="550" y="20" width="50" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="＋"/>
                                 <connections>
-                                    <action selector="pushToTabbar:" destination="whP-gf-Uak" eventType="touchUpInside" id="3v6-Pg-3yF"/>
+                                    <action selector="pushAddTabButton:" destination="whP-gf-Uak" eventType="touchDown" id="a7o-4c-XjO"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="fRw-KO-DFJ" secondAttribute="trailing" id="49q-PO-sFv"/>
+                            <constraint firstItem="EG3-MV-Y5i" firstAttribute="top" secondItem="gd4-r8-yA0" secondAttribute="bottom" id="13J-Mt-EzX"/>
+                            <constraint firstAttribute="trailing" secondItem="fRw-KO-DFJ" secondAttribute="trailing" constant="50" id="49q-PO-sFv"/>
+                            <constraint firstItem="EG3-MV-Y5i" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="6Re-kP-pIv"/>
                             <constraint firstItem="fRw-KO-DFJ" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" id="6m0-Zj-fSP"/>
-                            <constraint firstItem="pZB-EI-BeN" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="33" id="De7-F7-Vlu"/>
-                            <constraint firstItem="pZB-EI-BeN" firstAttribute="top" secondItem="fRw-KO-DFJ" secondAttribute="bottom" constant="61" id="Ovd-TB-6d3"/>
+                            <constraint firstItem="gd4-r8-yA0" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" id="Ntx-qS-NwM"/>
+                            <constraint firstItem="EG3-MV-Y5i" firstAttribute="top" secondItem="fRw-KO-DFJ" secondAttribute="bottom" id="O6I-Ar-Jwx"/>
+                            <constraint firstAttribute="trailing" secondItem="gd4-r8-yA0" secondAttribute="trailing" id="TVx-br-yt5"/>
                             <constraint firstItem="fRw-KO-DFJ" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="dxs-Dn-lPK"/>
+                            <constraint firstAttribute="trailing" secondItem="EG3-MV-Y5i" secondAttribute="trailing" id="hMY-i3-5yf"/>
+                            <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="EG3-MV-Y5i" secondAttribute="bottom" id="iK1-Bg-Dc8"/>
+                            <constraint firstItem="gd4-r8-yA0" firstAttribute="leading" secondItem="fRw-KO-DFJ" secondAttribute="trailing" id="vWX-EJ-OH4"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="baseView" destination="EG3-MV-Y5i" id="SPo-xx-rDi"/>
                         <outlet property="tabbar" destination="fRw-KO-DFJ" id="0ge-sb-T7x"/>
                         <outlet property="tabbarHeight" destination="iNp-Ji-c2v" id="iMz-Ec-kWe"/>
                     </connections>

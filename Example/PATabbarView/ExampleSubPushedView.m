@@ -20,7 +20,7 @@
     _color = self.backgroundColor;
 }
 - (IBAction)pushDeleteButton:(id)sender {
-    [self.delegate pushedDeleteButtonOnView:self];
+    [self.delegate pushedDeleteButtonInPushedView:self];
 }
 
 -(void)afterChangeState:(PATabbarPushedViewState)state{
@@ -33,32 +33,19 @@
         default:
             self.label.hidden = YES;
             self.bar.hidden = YES;
-            self.backgroundColor = [ExampleSubPushedView csn_colorWithBaseColor:_color brightnessRatio:0.5];
+            //self.backgroundColor = [ExampleSubPushedView csn_colorWithBaseColor:_color brightnessRatio:0.5];
             break;
     }
 }
 
-
-
-float randFloat(float a, float b)
-{
-    return ((b-a)*((float)arc4random()/ARC4RANDOM_MAX))+a;
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.delegate tapTab:self];
 }
 
-+ (UIColor *)csn_colorWithBaseColor:(UIColor *)baseColor brightnessRatio:(CGFloat)ratio
-{
-    CGFloat hue = 0;
-    CGFloat saturation = 0;
-    CGFloat brightness = 0;
-    CGFloat alpha = 0;
-    
-    BOOL converted = [baseColor getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
-    if (converted) {
-        return [UIColor colorWithHue:hue saturation:saturation brightness:(brightness * ratio) alpha:alpha];
-    }
-    
-    return nil;
-}
+
+
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

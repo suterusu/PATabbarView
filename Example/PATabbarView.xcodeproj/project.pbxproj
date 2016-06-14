@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080331FA1D0FB6540075268A /* ExampleSubPushedView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080331F91D0FB6540075268A /* ExampleSubPushedView2.xib */; };
+		080B5E401CEB47BA0051D9D3 /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 080B5E3F1CEB47BA0051D9D3 /* ExampleViewController.m */; };
+		081039FC1D0FBC17006C8858 /* ExampleSubPushedView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 081039FB1D0FBC17006C8858 /* ExampleSubPushedView2.m */; };
 		08F7FC201CB3AB9A00D9D35E /* ExampleSubPushedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F7FC1F1CB3AB9A00D9D35E /* ExampleSubPushedView.m */; };
 		08F7FC221CB3ABC400D9D35E /* ExampleSubPushedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F7FC211CB3ABC400D9D35E /* ExampleSubPushedView.xib */; };
 		5DFE76DFAC734AEDEB64875B /* Pods_PATabbarView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C830177527F6EFDB13BDE0 /* Pods_PATabbarView_Tests.framework */; };
@@ -38,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080331F91D0FB6540075268A /* ExampleSubPushedView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleSubPushedView2.xib; sourceTree = "<group>"; };
+		080B5E3E1CEB47BA0051D9D3 /* ExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewController.h; sourceTree = "<group>"; };
+		080B5E3F1CEB47BA0051D9D3 /* ExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewController.m; sourceTree = "<group>"; };
+		081039FA1D0FBC17006C8858 /* ExampleSubPushedView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSubPushedView2.h; sourceTree = "<group>"; };
+		081039FB1D0FBC17006C8858 /* ExampleSubPushedView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSubPushedView2.m; sourceTree = "<group>"; };
 		08F7FC1E1CB3AB9A00D9D35E /* ExampleSubPushedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSubPushedView.h; sourceTree = "<group>"; };
 		08F7FC1F1CB3AB9A00D9D35E /* ExampleSubPushedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSubPushedView.m; sourceTree = "<group>"; };
 		08F7FC211CB3ABC400D9D35E /* ExampleSubPushedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleSubPushedView.xib; sourceTree = "<group>"; };
@@ -140,9 +148,14 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* PATViewController.h */,
 				6003F5A6195388D20070C39A /* PATViewController.m */,
+				080331F91D0FB6540075268A /* ExampleSubPushedView2.xib */,
 				08F7FC211CB3ABC400D9D35E /* ExampleSubPushedView.xib */,
 				08F7FC1E1CB3AB9A00D9D35E /* ExampleSubPushedView.h */,
 				08F7FC1F1CB3AB9A00D9D35E /* ExampleSubPushedView.m */,
+				081039FA1D0FBC17006C8858 /* ExampleSubPushedView2.h */,
+				081039FB1D0FBC17006C8858 /* ExampleSubPushedView2.m */,
+				080B5E3E1CEB47BA0051D9D3 /* ExampleViewController.h */,
+				080B5E3F1CEB47BA0051D9D3 /* ExampleViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -290,6 +303,7 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				080331FA1D0FB6540075268A /* ExampleSubPushedView2.xib in Resources */,
 				08F7FC221CB3ABC400D9D35E /* ExampleSubPushedView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,7 +418,9 @@
 			files = (
 				6003F59E195388D20070C39A /* PATAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* PATViewController.m in Sources */,
+				080B5E401CEB47BA0051D9D3 /* ExampleViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				081039FC1D0FBC17006C8858 /* ExampleSubPushedView2.m in Sources */,
 				08F7FC201CB3AB9A00D9D35E /* ExampleSubPushedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

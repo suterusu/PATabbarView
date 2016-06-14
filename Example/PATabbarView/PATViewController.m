@@ -7,14 +7,16 @@
 //
 
 #import "PATViewController.h"
+#import "ExampleViewController.h"
 
 @interface PATViewController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabbarHeight;
 @property (weak, nonatomic) IBOutlet PATabbarView *tabbar;
+@property (weak, nonatomic) IBOutlet UIView *baseView;
 @end
 
 @implementation PATViewController{
-    ExampleSubPushedView *_currentCenter;
+    ExampleSubPushedView2 *_currentCenter;
     CGFloat _firstTabbarHeight;
 }
 
@@ -25,62 +27,94 @@
     self.tabbar.delegate = self;
 	// Do any additional setup after loading the view, typically from a nib.
 }
-- (IBAction)pushToTabbar:(id)sender {
-    if (self.tabbarHeight.constant == 0) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.tabbarHeight.constant = _firstTabbarHeight;
-            [self.view layoutIfNeeded];
-        }];
-    }
-    UINib *nib = [UINib nibWithNibName:@"ExampleSubPushedView" bundle:nil];
-    ExampleSubPushedView *pushedView=  [nib instantiateWithOwner:nil options:nil][0];
-    pushedView.delegate = self;
-    pushedView.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.tabbar addToTailView:pushedView];
-}
 
-
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self.view];
-    ExampleSubPushedView *touchedView = [self.view hitTest:point withEvent:nil];
-    if ([touchedView isKindOfClass:[ExampleSubPushedView class]]== NO) {
+-(void)setCurrentCenter:(ExampleSubPushedView2 *)nextCenter{
+    if ([_currentCenter isEqual:nextCenter]) {
         return;
     }
+    if (_currentCenter) {
+        _currentCenter.deleteButton.hidden = YES;
+    }
+    _currentCenter = nextCenter;
+    nextCenter.deleteButton.hidden = NO;
+}
 
-    switch (touchedView.currentState) {
-        case PATabbarPushedViewStatusEmphasis:{
-            for (ExampleSubPushedView *push = self.tabbar.head; push; push = push.next) {
-                push.deleteButton.alpha = 0;
-            }
-            touchedView.deleteButton.alpha = 1;
-            _currentCenter = touchedView;
-            break;}
-        case PATabbarPushedViewStatusDisplayed:{
-            [self.tabbar adjustPositionWithAForcusOnView:touchedView];
-            break;}
+
+- (IBAction)pushAddTabButton:(id)sender {
+    static int vcNum = 1;
+    UINib *nib = [UINib nibWithNibName:@"ExampleSubPushedView2" bundle:nil];
+    ExampleSubPushedView2 *pushedView=  [nib instantiateWithOwner:nil options:nil][0];
+    pushedView.delegate = self;
+    pushedView.controller = [self newVCOpen];
+    pushedView.controller.view.backgroundColor = pushedView.backgroundColor;
+    [pushedView.label setText:[NSString stringWithFormat:@"%d",vcNum]];
+    [self setCurrentCenter:pushedView];
+    [self.tabbar addToTailView:pushedView];
+    vcNum++;
+}
+
+
+
+-(void)tapTab:(ExampleSubPushedView2 *)sender{
+    if (sender.currentState == PATabbarPushedViewStatusEmphasis) {
+        if ([sender isEqual:_currentCenter]) {
+            return;
+        }
+        [self changeVCTo:sender.controller From:_currentCenter.controller];
+        [self setCurrentCenter:sender];
+    }else{
+        [self.tabbar adjustPositionWithAForcusOnView:sender];
     }
 }
 
--(void)finishedAdjustAnimationAtForcusedView:(PATabbarPushedView *)forcusedView{
-    for (ExampleSubPushedView *push = self.tabbar.head; push; push = push.next) {
-        push.deleteButton.alpha = 0;
+-(void)pushedDeleteButtonInPushedView:(ExampleSubPushedView2 *)sender{
+    if (sender == _currentCenter) {
+        if ((sender.next)||(sender.prev)) {
+            ExampleSubPushedView2 *next = sender.next ?:sender.prev;
+            [self changeVCTo:next.controller From:_currentCenter.controller];//交換
+            [self setCurrentCenter:next];
+        }else{
+            _currentCenter = nil;
+            [self deleteFromParentAtVC:sender.controller];
+        }
     }
-    _currentCenter = (ExampleSubPushedView *)forcusedView;
+    
+    sender.controller = nil;
+    [_tabbar deleteView:sender];
 }
 
--(void)deletedLastPushedView{
-    [UIView animateWithDuration:0.5 animations:^{
-        self.tabbarHeight.constant = 0;
-        [self.view layoutIfNeeded];
+-(UIViewController *)newVCOpen{
+    ExampleViewController *newVC = [[ExampleViewController alloc]init];
+    newVC.view.frame = self.baseView.frame;
+    
+    UIViewController *nextChildVC;
+    if (_currentCenter) {
+        nextChildVC = [self changeVCTo:newVC From:_currentCenter.controller];
+    }else{
+        [self addChildViewController:newVC];
+        [self.view addSubview:newVC.view];
+        [newVC didMoveToParentViewController:self];
+        nextChildVC = newVC;
+    }
+    return nextChildVC;
+}
+
+-(UIViewController *)changeVCTo:(UIViewController *)toVC From:(UIViewController *)fromVC{
+    [self addChildViewController:toVC];
+    [fromVC willMoveToParentViewController:nil];
+    [self transitionFromViewController:fromVC toViewController:toVC duration:0 options:UIViewAnimationOptionTransitionNone animations:nil completion:^(BOOL finished) {
+        [toVC didMoveToParentViewController:self];
+        [fromVC removeFromParentViewController];
     }];
-
+    return toVC;
 }
 
-//ExampleSubPushedView.h
--(void)pushedDeleteButtonOnView:(ExampleSubPushedView *)view{
-    [self.tabbar deleteView:view];
+-(void)deleteFromParentAtVC:(UIViewController *)deleteVC{
+    [deleteVC willMoveToParentViewController:nil];
+    [deleteVC removeFromParentViewController];
+    [deleteVC.view removeFromSuperview];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
