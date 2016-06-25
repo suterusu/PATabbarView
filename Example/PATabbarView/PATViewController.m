@@ -16,7 +16,7 @@
 @end
 
 @implementation PATViewController{
-    ExampleSubPushedView2 *_currentCenter;
+    ExampleSubPushedView *_currentCenter;
     CGFloat _firstTabbarHeight;
 }
 
@@ -28,7 +28,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
--(void)setCurrentCenter:(ExampleSubPushedView2 *)nextCenter{
+-(void)setCurrentCenter:(ExampleSubPushedView *)nextCenter{
     if ([_currentCenter isEqual:nextCenter]) {
         return;
     }
@@ -42,8 +42,8 @@
 
 - (IBAction)pushAddTabButton:(id)sender {
     static int vcNum = 1;
-    UINib *nib = [UINib nibWithNibName:@"ExampleSubPushedView2" bundle:nil];
-    ExampleSubPushedView2 *pushedView=  [nib instantiateWithOwner:nil options:nil][0];
+    UINib *nib = [UINib nibWithNibName:@"ExampleSubPushedView" bundle:nil];
+    ExampleSubPushedView *pushedView=  [nib instantiateWithOwner:nil options:nil][0];
     pushedView.delegate = self;
     pushedView.controller = [self newVCOpen];
     pushedView.controller.view.backgroundColor = pushedView.backgroundColor;
@@ -55,7 +55,7 @@
 
 
 
--(void)tapTab:(ExampleSubPushedView2 *)sender{
+-(void)tapTab:(ExampleSubPushedView *)sender{
     if (sender.currentState == PATabbarPushedViewStatusEmphasis) {
         if ([sender isEqual:_currentCenter]) {
             return;
@@ -63,14 +63,15 @@
         [self changeVCTo:sender.controller From:_currentCenter.controller];
         [self setCurrentCenter:sender];
     }else{
+        _currentCenter.deleteButton.hidden = YES;
         [self.tabbar adjustPositionWithAForcusOnView:sender];
     }
 }
 
--(void)pushedDeleteButtonInPushedView:(ExampleSubPushedView2 *)sender{
+-(void)pushedDeleteButtonInPushedView:(ExampleSubPushedView *)sender{
     if (sender == _currentCenter) {
         if ((sender.next)||(sender.prev)) {
-            ExampleSubPushedView2 *next = sender.next ?:sender.prev;
+            ExampleSubPushedView *next = sender.next ?:sender.prev;
             [self changeVCTo:next.controller From:_currentCenter.controller];//交換
             [self setCurrentCenter:next];
         }else{
