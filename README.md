@@ -30,7 +30,7 @@ pod "PATabbarView"
 
 1.Add PATabbarView To Interface.
 
-2.Make PATabbarPushedView class obj,and call addToTailView: in addition to this obj as an argument
+2.Make PATabbarPushedView,and call addToTailView: in addition to this as an argument
 
     UINib *nib = [UINib nibWithNibName:@"PATabbarPushedView" bundle:nil];
     PATabbarPushedView *pushedView=  [nib instantiateWithOwner:nil options:nil][0]; 
@@ -39,7 +39,7 @@ pod "PATabbarView"
     
 # Delete pushedView From tabbarView.
 If call deleteView:, Argument view is deleted from PATabbarView with delete and reposition animation.
-PushedView must be in subview of PATabbarPushedView obj.
+PushedView must be in subview of PATabbarPushedView.
 
 `[self.tabbarView deleteView:pushedView];`
 
@@ -47,7 +47,7 @@ PushedView must be in subview of PATabbarPushedView obj.
 # Reposition pushedView.
 If call adjustPositionWithAForcusOnView:,Pushed views reposition With A Forcus On argument view with a animation.
 
-`[self.tabbarViewadjustPositionWithAForcusOnView:centerPushedView];`
+`[self.tabbarView adjustPositionWithAForcusOnView:centerPushedView];`
 
 
 # Design pushedView
