@@ -25,6 +25,7 @@
     [super viewDidLoad];
     _firstTabbarHeight = self.tabbarHeight.constant;
     self.tabbar.delegate = self;
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

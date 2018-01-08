@@ -28,9 +28,57 @@
 }
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self setDefParams];
     _firstConstrainsArray = [NSArray arrayWithArray:self.constraints];
+    if (self.isEnableSwipe == YES) {
+        UISwipeGestureRecognizer *swipeL = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
+        swipeL.direction = UISwipeGestureRecognizerDirectionLeft;
+        
+        UISwipeGestureRecognizer *swipeR = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
+        swipeR.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [self addGestureRecognizer:swipeL];
+        [self addGestureRecognizer:swipeR];
+    }
 }
+
+-(void)swipeRight:(UIGestureRecognizer *)gest{
+    PATabbarPushedView *center = nil;
+    for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
+        if (pushedView.currentState == PATabbarPushedViewStatusDisplayed) {
+            center = pushedView;
+        }
+        if (pushedView.currentState == PATabbarPushedViewStatusEmphasis) {
+            break;
+        }
+        
+    }
+    
+    if (center) {
+        [self adjustPositionWithAForcusOnView:center];
+    }
+}
+
+
+-(void)swipeLeft:(UIGestureRecognizer *)gest{
+    PATabbarPushedView *center = nil;
+    for (PATabbarPushedView *pushedView = self.tail; pushedView; pushedView = pushedView.prev) {
+        if (pushedView.currentState == PATabbarPushedViewStatusDisplayed) {
+            center = pushedView;
+        }
+        if (pushedView.currentState == PATabbarPushedViewStatusEmphasis) {
+            break;
+        }
+    }
+    
+    if (center) {
+        [self adjustPositionWithAForcusOnView:center];
+    }
+}
+
+
+
 
 -(void)setDefParams{
     _ratioOfEmphasisedViewWidth = 0.8;

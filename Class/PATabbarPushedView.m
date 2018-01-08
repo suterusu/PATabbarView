@@ -14,6 +14,7 @@
 }
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     self.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = self.constraints;
 }

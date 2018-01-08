@@ -21,6 +21,8 @@
 
 @interface PATabbarView : UIView
 
+@property IBInspectable BOOL isEnableSwipe;
+
 @property CGFloat ratioOfEmphasisedViewWidth;
 @property NSInteger sumOfEmphasisPushedView;
 @property NSInteger sumOfDisplayedView;
