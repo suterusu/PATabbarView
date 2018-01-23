@@ -133,18 +133,18 @@
         deleteView.hidden = YES;
         [UIView animateWithDuration:_durationForDeleteAnime animations:^{
             if (nextOfDeleteView) {
-                [nextOfDeleteView removeConstraints:nextOfDeleteView.constraints];
+                [NSLayoutConstraint deactivateConstraints:nextOfDeleteView.constraints];
                 [nextOfDeleteView reAddFirstSelfConstraints];
                 
-                [nextOfDeleteView addConstraint:[NSLayoutConstraint constraintWithItem:nextOfDeleteView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:deleteView.frame.size.width]];//Width
-                [nextOfDeleteView addConstraint:[NSLayoutConstraint constraintWithItem:nextOfDeleteView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:deleteView.frame.size.height]];//Height
+                [[NSLayoutConstraint constraintWithItem:nextOfDeleteView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:deleteView.frame.size.width] setActive:YES];//Width
+                [[NSLayoutConstraint constraintWithItem:nextOfDeleteView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:deleteView.frame.size.height] setActive:YES];//Height
                 [nextOfDeleteView setState:PATabbarPushedViewStatusEmphasis];
             }
             
             if ((previousOfDeleteView == nil)&&nextOfDeleteView) {//nextSelectedView is head |-(0)-nextSelectedView
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:_lengthBetweenPushedViews]];
+                [[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:_lengthBetweenPushedViews] setActive:YES];
             }else if (nextOfDeleteView&&previousOfDeleteView){//previous-(0)-next
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:previousOfDeleteView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:_lengthBetweenPushedViews]];
+                [[NSLayoutConstraint constraintWithItem:previousOfDeleteView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:nextOfDeleteView attribute:NSLayoutAttributeLeft multiplier:1 constant:_lengthBetweenPushedViews] setActive:YES];
             }
             [self layoutIfNeeded];
         } completion:^(BOOL finished) {
@@ -169,22 +169,22 @@
 
 -(void)adjustPositionWithAForcusOnView:(PATabbarPushedView *)centerView{
     //Delete All Constraints
-    [self removeConstraints:self.constraints];
+    [NSLayoutConstraint deactivateConstraints:self.constraints];
     for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
-        [pushedView removeConstraints:pushedView.constraints];
+        [NSLayoutConstraint deactivateConstraints:pushedView.constraints];
         [pushedView reAddFirstSelfConstraints
          ];
     }
     
     //Resetup Constraints
-    [self addConstraints:_firstConstrainsArray];
+    [NSLayoutConstraint activateConstraints:_firstConstrainsArray];
     
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_head attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_head attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [[NSLayoutConstraint constraintWithItem:_head attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1 constant:0] setActive:YES];
+    [[NSLayoutConstraint constraintWithItem:_head attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0]setActive:YES];
     
     for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:pushedView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-        [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.frame.size.height]];
+        [[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:pushedView attribute:NSLayoutAttributeTop multiplier:1 constant:0]setActive:YES];
+        [[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.frame.size.height] setActive:YES];
     }
     
     NSDictionary *dicSeparatedStatus = [self setStatesForPushedViewsInListOnTheBasisOfView:centerView];
@@ -206,20 +206,20 @@
         float spaceLength = 0;//only exist between displayed and emphasis pushedViews
             
         if ([emphasisDisplayedViews containsObject:pushedView]) {
-            [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:emphasisViewWidth]];
+            [[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:emphasisViewWidth] setActive:YES];
             spaceLength = _lengthBetweenPushedViews;
         }else if ([displayedViews containsObject:pushedView]){
-            [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:displayViewWidth]];
+            [[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:displayViewWidth] setActive:YES];
             spaceLength = _lengthBetweenPushedViews;
         }else{
-            [pushedView addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0]];
+            [[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0] setActive:YES];
         }
         
         if (pushedView.next) {
             if ((spaceLength >0) && ([notDisplayedViews containsObject:pushedView.next]) ) {
                 spaceLength = 0;
             }
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:pushedView.next attribute:NSLayoutAttributeLeft multiplier:1 constant:-spaceLength]];
+            [[NSLayoutConstraint constraintWithItem:pushedView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:pushedView.next attribute:NSLayoutAttributeLeft multiplier:1 constant:-spaceLength] setActive:YES];
         }
     }
     
@@ -314,9 +314,10 @@
         }
     }];
     
-    [from removeConstraints:from.constraints];
-    [from addConstraints:[NSArray arrayWithArray:newConstraints]];
+    [NSLayoutConstraint deactivateConstraints:from.constraints];
+    [NSLayoutConstraint activateConstraints:[NSArray arrayWithArray:newConstraints]];
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

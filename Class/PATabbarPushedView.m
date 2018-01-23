@@ -69,7 +69,7 @@
 @implementation PATabbarPushedView (Private)
 
 -(void)reAddFirstSelfConstraints{
-    [self addConstraints:_constraints];
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
 -(void)setNext:(PATabbarPushedView *)next{
