@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PATabbarView"
-  s.version          = "0.2.2"
+  s.version          = "0.2.4"
   s.summary          = "Pushable Tabbar Like MacOS Safari"
 
   s.description      = <<-DESC
@@ -12,7 +12,7 @@ Pushable Tabbar is like MacOS Safari.You can add subclass of PATabbarPushedView 
   s.author           = { "Inba" => "gyuuuuchan@gmail.com" }
   s.source           = { :git => "https://github.com/suterusu/PATabbarView.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '10.0'
   s.requires_arc = true
 
   s.source_files = 'Class/*'
