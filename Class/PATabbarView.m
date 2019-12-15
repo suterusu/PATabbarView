@@ -32,18 +32,20 @@
     [self setDefParams];
     _firstConstrainsArray = [NSArray arrayWithArray:self.constraints];
     if (self.isEnableSwipe == YES) {
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
+        
         UISwipeGestureRecognizer *swipeL = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
         swipeL.direction = UISwipeGestureRecognizerDirectionLeft;
         
         UISwipeGestureRecognizer *swipeR = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
         swipeR.direction = UISwipeGestureRecognizerDirectionRight;
         
-        [self addGestureRecognizer:swipeL];
-        [self addGestureRecognizer:swipeR];
+        [self addGestureRecognizer:pan];
     }
 }
 
--(void)swipeRight:(UIGestureRecognizer *)gest{
+-(void)swipeRight{
     PATabbarPushedView *center = nil;
     for (PATabbarPushedView *pushedView = self.head; pushedView; pushedView = pushedView.next) {
         if (pushedView.currentState == PATabbarPushedViewStatusDisplayed) {
@@ -61,7 +63,7 @@
 }
 
 
--(void)swipeLeft:(UIGestureRecognizer *)gest{
+-(void)swipeLeft{
     PATabbarPushedView *center = nil;
     for (PATabbarPushedView *pushedView = self.tail; pushedView; pushedView = pushedView.prev) {
         if (pushedView.currentState == PATabbarPushedViewStatusDisplayed) {
@@ -76,6 +78,19 @@
         [self adjustPositionWithAForcusOnView:center];
     }
 }
+
+
+-(void)pan:(UIPanGestureRecognizer *)pan{
+    CGPoint touchPoint = [pan translationInView:pan.view];
+    if (touchPoint.x > 60) {
+        [self swipeRight];
+        [pan setTranslation:CGPointZero inView:pan.view];
+    }else if(touchPoint.x < -60){
+        [self swipeLeft];
+        [pan setTranslation:CGPointZero inView:pan.view];
+    }
+}
+
 
 
 
